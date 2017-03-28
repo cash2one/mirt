@@ -1,0 +1,17 @@
+{% if messages %}
+    <a href="{{ request.META.PATH_INFO }}" class="modal-backdrop" id="message-backdrop"></a>
+    <div class="modal-window" id="message-popup">
+        <div class="inner tmce">
+        <a href="{{ request.META.PATH_INFO }}" class="close-it">&#215;</a>
+        {% for message in messages %}
+            {{ message|safe }}
+        {% endfor %}
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            init_modalz($("#message-popup"),$("#message-backdrop"), true);
+        })
+    </script>
+{% endif %}

@@ -1,0 +1,10 @@
+<div class="flatpage-bottom-menu">
+{% if nodes %}
+    <div class="flatpage-bottom-menu-wrapper">
+        {% for node in nodes %}
+            <a href="{{ node.url }}" class="menu-item{% if node.url == url %} active{% endif %}">{{ node.get_menu_title }}</a>
+        {% endfor %}
+        <div class="cb"></div>
+    </div>
+{% endif %}
+</div>

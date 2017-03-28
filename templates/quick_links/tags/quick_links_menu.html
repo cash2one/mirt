@@ -1,0 +1,40 @@
+{% if quick_links %}
+<div class="quick-links">
+<table>
+<tbody>
+<tr>
+{% for l in quick_links %}
+    <td class="{% if forloop.first %}first{% endif %}{% if forloop.last %} last{% endif %}{% if l.active %} active{% endif %}{% if l.children %} wth-children{% endif %}">
+        <a class="level-0" href="/{{ l.slug }}">
+            <span>{{ l.name }}</span>
+        </a>
+        {% if l.children %}
+            <div class="links-submenu">
+                {% for c in l.children %}
+                    <div class="links-submenu-container{% if c.active %} active{% endif %}">
+                    <a class="level-1{% if c.active %} active{% endif %}{% if c.children %} wth-children{% endif %}" href="/{{ c.slug }}">{{ c.name }}</a>
+                    {% if c.children %}
+                    <div class="submenu-children-handle">
+                        <div class="submenu-children">
+                            {% for xc in c.children %}
+                                <a class="level-2{% if xc.active %} active{% endif %}" href="/{{ xc.slug }}">{{ xc.name }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </td>
+{% endfor %}
+</tr>
+</tbody>
+</table>
+<div class="cb"></div>
+</div>
+{% else %}
+    <div class="cb-20"></div>
+{% endif %}
+
+

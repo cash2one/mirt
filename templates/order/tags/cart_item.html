@@ -1,0 +1,46 @@
+{% load thumbnail catalog_filters %}
+<tr class="cart-product{% if forloop.last %} last{% endif %}{% if forloop.first %} first{% endif %}" item_id="{{ item.id }}">
+    <td class="cart-product-image">
+        <a href="{{ item.product.get_absolute_url }}" title="{{ item.product.name }}">
+            <div class="product-image-wrapper">
+                {% if item.product.get_primary_image %}
+                    {% with item.product.get_primary_image.file as image %}
+                    {% if image|is_portrait %}
+                        {% thumbnail image "x122" crop="center" upscale=False quality=100 as im %}
+                            <img src="{{ im.url }}" alt="{{ item.name }}">
+                        {% endthumbnail %}
+                    {% else %}
+                        {% thumbnail image "161" crop="center" upscale=False quality=100 as im %}
+                            <img src="{{ im.url }}" alt="{{ item.name }}">
+                        {% endthumbnail %}
+                    {% endif %}
+                    {% endwith %}
+                {% else %}
+                    <img src="http://placehold.it/161x122" alt="{{ item.name }}">
+                {% endif %}
+            </div>
+        </a>
+    </td>
+    <td class="cart-product-details">
+        <a href="{{ item.product.get_absolute_url }}" title="{{ item.product.name }}">
+            <div class="product-title">{{ item.product.name }}</div>
+        </a>
+        <div class="product-short-desc tmce">
+            {% autoescape off %}{{ item.product.short_description }}{% endautoescape %}
+        </div>
+    </td>
+    <td class="cart-product-price">
+        {{ item.product.get_price }} руб.
+    </td>
+    <td class="cart-product-quantity">
+        <div class="frame">
+            <a href="{% url "order:update_cart" item.id -1 %}" class="tiny-button subtract"></a>
+            <div class="product-q">{{ item.quantity }}</div>
+            <a href="{% url "order:update_cart" item.id 1 %}" class="tiny-button add"></a
+        </div>
+    </td>
+    <td class="cart-product-total-price">
+        <div class="num">{{ item.total_price|format_price }} руб.</div>
+        <a href="{% url "order:remove_from_cart" item.id %}" class="remove-from-cart">&#215;</a>
+    </td>
+</tr>

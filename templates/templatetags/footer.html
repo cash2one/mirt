@@ -1,0 +1,85 @@
+{% load flatpages_extras placeholder catalog_extras %}
+
+	<!-- подвал -->
+	<div class="footer">
+		{% get_bottom_menu flatpage.url %}
+
+		<div class="inner">
+			<div class="blc-r">
+				<div class="fmenu">
+					<ul>
+						<li><a href="#">Контакты</a></li>
+						<li><a href="#">Обратная связь</a></li>
+						<li><a href="#">Карта сайта</a></li>
+					</ul>
+				</div>
+				<div class="social">
+					<script type="text/javascript">(function() {
+					  if (window.pluso)if (typeof window.pluso.start == "function") return;
+					  if (window.ifpluso==undefined) { window.ifpluso = 1;
+						var d = document, s = d.createElement('script'), g = 'getElementsByTagName';
+						s.type = 'text/javascript'; s.charset='UTF-8'; s.async = true;
+						s.src = ('https:' == window.location.protocol ? 'https' : 'http')  + '://share.pluso.ru/pluso-like.js';
+						var h=d[g]('body')[0];
+						h.appendChild(s);
+					  }})();</script>
+					<div class="pluso" data-background="transparent" data-options="medium,round,line,horizontal,nocounter,theme=04" data-services="vkontakte,facebook,twitter,odnoklassniki,google,moimir"></div>
+				</div>
+				<div class="copyright">© {% now "Y" %} «МИР ТЮНИНГА» — сеть магазинов автотоваров </div>
+			</div>
+
+            {% get_sub_bottom_menu %}
+		</div>
+	</div>
+
+	<!-- -->
+	<div class="footer_text">
+		<div class="in">
+			<div class="hh">Информация о ценах и наличии товара обновлена {% get_last_date %} UTC+7</div>
+			<div class="text"><p>Информация, указанная на сайте, не является публичной офертой. Информация о товарах, их технических свойствах и характеристиках, ценах является предложением “Мир Тюнинга” делать оферты. Акцептом “Мир Тюнинга” полученной оферты является подтверждение заказа с указанием товара и его цены. Сообщение “Мир Тюнинга” о цене заказанного товара, отличающейся от указанной в оферте, является отказом “Мир Тюнинга” от акцепта и одновременно офертой со стороны “Мир Тюнинга”. Информация о технических характеристиках товаров, указанная на сайте, может быть изменена производителем в одностороннем порядке. Изображения товаров на фотографиях, представленных в каталоге на сайте, могут отличаться от оригиналов. Информация о цене товара, указанная в каталоге на сайте, может отличаться от фактической к моменту оформления заказа на соответствующий товар. Подтверждением цены заказанного товара является сообщение “Мир Тюнинга” о цене такого товара.</p>
+                <!-- Yandex.Metrika informer -->
+                <a href="https://metrika.yandex.ru/stat/?id=26048613&amp;from=informer"
+                target="_blank" rel="nofollow"><img src="https://informer.yandex.ru/informer/26048613/3_0_FFFFFFFF_EFEFEFFF_0_pageviews"
+                style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика" title="Яндекс.Метрика: данные за сегодня (просмотры, визиты и уникальные посетители)" onclick="try{Ya.Metrika.informer({i:this,id:26048613,lang:'ru'});return false}catch(e){}" /></a>
+                <!-- /Yandex.Metrika informer -->
+
+                <!-- Yandex.Metrika counter -->
+                <script type="text/javascript">
+                    (function (d, w, c) {
+                        (w[c] = w[c] || []).push(function() {
+                            try {
+                                w.yaCounter26048613 = new Ya.Metrika({
+                                    id:26048613,
+                                    clickmap:true,
+                                    trackLinks:true,
+                                    accurateTrackBounce:true,
+                                    webvisor:true,
+                                    trackHash:true
+                                });
+                            } catch(e) { }
+                        });
+
+                        var n = d.getElementsByTagName("script")[0],
+                            s = d.createElement("script"),
+                            f = function () { n.parentNode.insertBefore(s, n); };
+                        s.type = "text/javascript";
+                        s.async = true;
+                        s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+                        if (w.opera == "[object Opera]") {
+                            d.addEventListener("DOMContentLoaded", f, false);
+                        } else { f(); }
+                    })(document, window, "yandex_metrika_callbacks");
+                </script>
+                <noscript><div><img src="https://mc.yandex.ru/watch/26048613" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+                <!-- /Yandex.Metrika counter -->
+            </div>
+		</div>
+	</div>
+	<!-- -->
+
+<!-- BEGIN JIVOSITE CODE {literal} -->
+<script type='text/javascript'>
+(function(){ var widget_id = '5bGRs6H6MI';
+var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = '//code.jivosite.com/script/widget/'+widget_id; var ss = document.getElementsByTagName('script')[0]; ss.parentNode.insertBefore(s, ss);})();</script>
+<!-- {/literal} END JIVOSITE CODE -->

@@ -1,0 +1,15 @@
+{% if nodes %}
+<div class="sub-bottom-menu">
+    {% for node in nodes %}
+    <div class="menu-col">
+        <div class="menu-item">
+            <a href="{{ node.get_absolute_url }}">{{ node.get_menu_title }}</a>
+        </div>
+        {% for child in node.children %}
+            <a href="{{ child.get_absolute_url }}" class="sub-menu-item">{{ child.get_menu_title }}</a>
+        {% endfor %}
+    </div>
+    {% if forloop.counter|divisibleby:4 %}<div class="cb"></div>{% endif %}
+    {% endfor %}
+</div>
+{% endif %}

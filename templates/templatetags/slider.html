@@ -1,0 +1,31 @@
+{% load thumbnail flatpages_extras %}
+{% if slides %}
+
+                <div class="blc-slider">
+					<div class="inner">
+						<div id="slides">
+							<div class="slides_container">
+                                {% for slide in slides %}
+                                    <div class="slide">
+                                        <div class="foto">
+                                            <a href="{{ slide.url }}">
+                                                <img src="{{ slide.image.url }}" alt="" />
+                                            </a>
+                                        </div>
+                                        <div class="text">
+                                            <div class="name">
+                                                <a href="{{ slide.url }}">
+                                                    <b>{{ slide.name }}</b>
+                                                </a>
+                                            </div>
+                                            {% if slide.content %}<div class="price">{{ slide.content|safe }}</div>{% endif %}
+                                        </div>
+                                    </div>
+                                {% endfor %}
+							</div>
+							<a href="#" class="prev"></a>
+							<a href="#" class="next"></a>
+						</div>
+					</div>
+				</div>
+{% endif %}

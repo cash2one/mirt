@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+
+{% load flatpages_extras seo_extras services_extras order_extras catalog_extras %}
+
+    {% block page-seo %}
+        {% load seo_extras %}
+        {% get_seo item %}
+    {% endblock %}
+
+    {% block header %}
+        {% include "templatetags/header.html" with url="/profile/" %}
+    {% endblock %}
+
+    {% block breadcrumbs %}
+        {% include "templatetags/breadcrumbs.html" %}
+    {% endblock %}
+
+    {% block main-content %}
+
+        <div class="main-content" xmlns="http://www.w3.org/1999/html">
+            <div class="cb" style="height: 10px;"></div>
+            <div class="main-content-l lk">
+                <div class="tree-menu side-menu">
+                        <a class="menu-item lvl0 select" href="{% url 'personal:edit_user_profile' %}">
+                            Личные данные
+                        </a>
+                        <a class="menu-item lvl0" href="{% url 'personal:list_orders' %}">
+                            История покупок
+                        </a>
+                </div>
+            </div>
+            <form action="{% url 'personal:edit_user_profile' %}" method="post">
+            {% csrf_token %}
+            <div class="main-content-r tmce lk lk-top">
+                <h1>Личные данные</h1>
+                <table class="personal-info">
+                    <tr>
+                        <td class="field-caption">
+                            ФИО
+                        </td>
+                        <td class="field {% if form.first_name.errors %}error{% endif %}">
+                            {{ form.first_name }}
+                            <span class="pencil"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="field-caption">
+                            Телефон
+                        </td>
+                        <td class="field {% if profile_form.phone.errors %}error{% endif %}">
+                            {{ profile_form.phone }}
+                            <span class="pencil"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="field-caption">
+                            E-mail
+                        </td>
+                        <td class="field">
+                            <input placeholder="{{ email }}" required="" type="email" disabled="disabled">
+                            <span class="pencil"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="field-caption">
+                            Индекс
+                        </td>
+                        <td class="field {% if profile_form.address.errors %}error{% endif %}">
+                            {{ profile_form.address }}
+                            <span class="pencil"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="field-caption">
+                            Город
+                        </td>
+                        <td class="field {% if profile_form.city.errors %}error{% endif %}">
+                            {{ profile_form.city }}
+                            <span class="pencil"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="field-caption">
+                            Улица
+                        </td>
+                        <td class="field {% if profile_form.street.errors %}error{% endif %}">
+                            {{ profile_form.street }}
+                            <span class="pencil"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="field-caption">
+                            Дом
+                        </td>
+                        <td class="field {% if profile_form.house.errors %}error{% endif %}">
+                            {{ profile_form.house }}
+                            <span class="pencil"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="field-caption">
+                            Квартира
+                        </td>
+                        <td class="field  {% if profile_form.apartment.errors %}error{% endif %}">
+                            {{ profile_form.apartment  }}
+                            <span class="pencil"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="field-caption">
+                        </td>
+                        <td class="field">
+                            <button class="cart-button">Сохранить</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            </form>
+            <div class="main-content-r tmce lk lk-bottom">
+                <div class="fake-h1">Изменение пароля</div>
+                <form action="{% url 'personal:edit_password' %}" method="post">
+                    {% csrf_token %}
+                <table class="personal-info">
+                    <tr>
+                        <td class="field-caption">
+                            Старый пароль
+                        </td>
+                        <td class="field {% if novalid %}error{% endif %}">
+                            <input name="oldpass" placeholder="" required="" type="password">
+                            <span class="pencil"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="field-caption">
+                            Новый пароль
+                        </td>
+                        <td class="field {% if norepeat %}error{% endif %}">
+                            <input name="newpass" placeholder="" required="" type="password">
+                            <span class="pencil"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="field-caption">
+                            Подтвердите пароль
+                        </td>
+                        <td class="field  {% if norepeat %}error{% endif %}">
+                            <input name="cnewpass" placeholder="" required="" type="password">
+                            <span class="pencil"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="field-caption">
+                        </td>
+                        <td class="field">
+                            <button class="cart-button">Изменить</button>
+                        </td>
+                    </tr>
+                </table>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="cb"></div>
+
+    {% endblock %}
+
+
+

@@ -1,0 +1,20 @@
+<form class="form order-form" method="post" action="{% url "order:checkout" %}">
+    {% csrf_token %}
+    <table>
+        <tbody>
+            {% for field in form %}
+            <tr>
+                <td class="left">{{ field.label }}{% if field.field.required %}<span class="required">*</span>{% endif %}</td>
+                <td class="row {% if field.errors %}error{% endif %}">
+                    {{ field }}
+                </td>
+            </tr>
+            {% endfor %}
+
+            <tr>
+                <td class="left"></td>
+                <td><button class="cart-button" type="submit">Оформить</button></td>
+            </tr>
+        </tbody>
+    </table>
+</form>

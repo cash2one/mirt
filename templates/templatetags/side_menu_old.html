@@ -1,0 +1,16 @@
+{% load mptt_tags %}
+{% if nodes %}
+    <div class="tree-menu side-menu">
+        {% recursetree nodes %}
+            <a class="menu-item{% if node.slug in expand %} expanded{% endif %}{% if node.slug == url %} active{% endif %}{% if not node.is_leaf_node %} wth-children{% endif %} lvl{{ node.level }}" href="{{ node.get_absolute_url }}">
+                {{ node.get_menu_title }}
+            </a>
+            {% if not node.is_leaf_node %}
+                {% if node.slug in expand %}{{ children }}{% endif %}
+            {% endif %}
+            {% if node.level == 0 %}
+                {% if node.slug in expand %}<div class="menu-sep"></div>{% endif %}
+            {% endif %}
+        {% endrecursetree %}
+    </div>
+{% endif %}

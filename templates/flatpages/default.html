@@ -1,0 +1,25 @@
+{% extends 'base_inner.html' %}
+    {% load flatpages_extras seo_extras services_extras order_extras catalog_extras announce_extras %}
+
+    {% block page-seo %}
+        {% load seo_extras %}
+        {% get_seo flatpage %}
+    {% endblock %}
+
+    {% block header %}
+        {% include "templatetags/header.html" with url=flatpage.url %}
+    {% endblock %}
+
+    {% block breadcrumbs %}
+        {% include "templatetags/breadcrumbs.html" %}
+    {% endblock %}
+
+    {% block title %}{{ flatpage.title }}{% endblock %}
+
+    {% block content %}
+        {% if flatpage.content %}
+            {{ flatpage.content|safe }}
+        {% else %}
+            <p>------</p>
+        {% endif %}
+    {% endblock %}

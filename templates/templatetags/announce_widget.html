@@ -1,0 +1,13 @@
+{% if list %}
+<div class="announce_widget">
+    <div class="title">Анонсы</div>
+    {% for item in list %}
+        <div class="item">
+            <a href="{{ item.get_absolute_url }}" class="">{{ item.get_title }}</a>
+            <div class="short-desc">{{ item.teaser }}</div>
+            <div class="date">{{ item.created_at }}</div>
+        </div>
+    {% endfor %}
+    <a href="{% url "announce:announce-list" %}" class="all-announces small-gray-button">Все анонсы</a>
+</div>
+{% endif %}

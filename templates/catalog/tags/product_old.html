@@ -1,0 +1,42 @@
+{% load thumbnail watermark %}
+<div  class="catalog-product {% if forloop.counter|divisibleby:4 %}last{% endif %}">
+    <a class="product-link" href="{{ item.get_absolute_url }}" title="{{ item.name }}">
+        <div class="product-image-wrapper">
+            <div class="product-image">
+                {% if item.get_primary_image %}
+                    {% if item.get_primary_image.file|is_portrait %}
+                        {% thumbnail item.get_primary_image.file "x121" crop="center" upscale=False quality=100 as im %}
+                            <img src="{{ im.url }}" alt="{{ item.name }}">
+                        {% endthumbnail %}
+                    {% else %}
+                        {% thumbnail item.get_primary_image.file "160" crop="center" upscale=False quality=100 as im %}
+                            <img src="{{ im.url }}" alt="{{ item.name }}">
+                        {% endthumbnail %}
+                    {% endif %}
+                {% else %}
+                    <img src="http://placehold.it/165x112" alt="{{ item.name }}">
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="product-title">
+            {{ item.name }} {% if item.brand %}{{ item.brand }}{% endif %}
+        </div>
+    </a>
+
+        <div class="product-short-desc tmce">
+            {% if item.short_description %}
+                {% autoescape off %}{{ item.short_description|linebreaksbr|truncatechars:55 }}{% endautoescape %}
+            {% endif %}
+        </div>
+
+    <form class="catalog-product-form" action="{% url "order:add_to_cart" item.id %}" method="post">
+        <div class="product-price">
+            {% if item.get_price %}{{ item.get_price }} руб.{% endif %}
+        </div>
+
+        {% csrf_token %}
+        <input type="hidden" name="quantity" value="1">
+        <button class="small-butt buy-product" type="submit">Купить</button>
+    </form>
+</div>

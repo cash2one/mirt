@@ -1,0 +1,12 @@
+<div style="overflow: hidden; padding: 0 0 50px 0;">
+    {% if items %}
+
+        {% for item in items %}
+            {% include "catalog/tags/product.html" %}
+            {% if forloop.counter|divisibleby:4 %}
+
+            {% endif %}
+        {% endfor %}
+
+    {% endif %}
+</div>

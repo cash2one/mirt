@@ -1,0 +1,35 @@
+{% load widget_tweaks %}
+<div class="enter">
+{% if data.no_enter %}
+     <div class="auth"><a class="color enter-link" href="/?auth=True">Войти</a></div>
+{% else %}
+
+    <div class="auth"><a style="display: none" href="{% url 'personal:edit_user_profile' %}" class="cart-button">Профиль</a><a href="{% url 'personal:auth_logout' %}" class="off">Выйти</a></div>
+
+{% endif %}
+</div>
+
+{% if data.form %}
+<div class="win authform" style="display: {{ data.hide }}">
+    <div class="in enter-form enter-form-reg">
+        <div class="close"><a href="javascript:void(0);">Закрыть</a></div>
+        <div class="hf">{{ data.name }}</div>
+        <form enctype="" action='{{ data.action_to }}' method="post">
+            {% csrf_token %}
+
+            {% for field in data.form %}
+                <label {% if field.errors %}class="error"{% endif %}>{{ field.label }}</label>
+                {% with WIDGET_ERROR_CLASS='error' %}
+                    {% render_field field %}
+                {% endwith %}
+            {% endfor %}
+            <div class="cb"></div>
+            <table style="margin: 0 auto"><tr><td><button class="cart-button">{{ data.submit_name }}</button></td></tr></table>
+            <div class="cb"></div>
+            {% for e in data.extra_links %}
+                <p class="other"><a href="?{{ e.q }}=True">{{ e.name }}</a></p>
+            {% endfor %}
+        </form>
+    </div>
+</div>
+{% endif %}

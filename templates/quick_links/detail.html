@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load flatpages_extras seo_extras services_extras catalog_extras thumbnail order_extras quick_links %}
+
+{% block page-seo %}
+    {% load seo_extras %}
+    {% get_seo link %}
+{% endblock %}
+
+{% block header %}
+    {% include "templatetags/header.html" %}
+{% endblock %}
+
+{% block quick_links %}{% quick_links link.id %}{% endblock %}
+
+{% block breadcrumbs %}
+    {% include "templatetags/breadcrumbs.html" %}
+{% endblock %}
+
+{% block main-content %}
+    <div class="main-content">
+        <div class="cb" style="height: 30px;"></div>
+        <div class="main-content-l">
+            {% catalog_side_menu directory.slug %}
+        </div>
+        <div class="main-content-r tmce">
+            <h1>{{ link.name }}</h1>
+            {% autoescape off %}{{ link.description_up }}{% endautoescape %}
+            <div class="cb"></div>
+            {% if items %}
+                {% include "catalog/tags/list_controls.html" %}
+                {% include "catalog/tags/items_list.html" %}
+                {% include "catalog/tags/products_pagination.html" with items=items %}
+            {% endif %}
+            <div class="cb-40"></div>
+            {% autoescape off %}{{ link.description_down }}{% endautoescape %}
+            <div class="cb"></div>
+        </div>
+        <div class="cb"></div>
+    </div>
+{% endblock %}

@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+{% load  flatpages_extras placeholder quick_links feedback_extras order_extras %}
+<!--[if lt IE 7]> <html class="lt-ie9 lt-ie8 lt-ie7" lang="ru"> <![endif]-->
+<!--[if IE 7]> <html class="lt-ie9 lt-ie8 ie7" lang="ru"> <![endif]-->
+<!--[if IE 8]> <html class="lt-ie9" lang="ru"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="ru"> <!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <link rel="shortcut icon" href="/media/img/favicon.ico" />
+
+    {% include "templatetags/jscss.html" %}
+    {% block extrascripts %}{% endblock %}
+    {% block page-seo %}
+        <title>{{ config.DEFAULT_TITLE }}</title>
+        <meta name="description" content="{{ config.DEFAULT_DESCR }}">
+        <meta name="keywords" content="{{ config.DEFAULT_KEYWORDS }}">
+    {% endblock %}
+
+
+</head>
+<body>
+    {% include "templatetags/messages_popup.html" with messages=messages %}
+    {% block modals %}{% feedback_form request context %}{% endblock %}
+
+    <div id="main-content-wrapper">
+        {% block header %}{% endblock %}
+        <div class="wrap">
+            {% block slider %}{% endblock %}
+            {% block quick_links %}{% quick_links %}{% endblock %}
+            {% block breadcrumbs %}{% endblock %}
+            {% block main-content %}{% endblock %}
+            <div class="cb"></div>
+
+        </div>
+        <div class="cb"></div>
+
+    <div class="pax"></div>
+    </div>
+
+    {% include "templatetags/footer111.html" %}
+{#    {% include "templatetags/metrix.html" %}#}
+</body>
+</html>

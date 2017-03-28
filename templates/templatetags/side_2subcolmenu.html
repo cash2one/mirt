@@ -1,0 +1,14 @@
+{% load mptt_tags catalog_extras %}
+{% if nodes %}
+    <div class="submenu2">
+        <ul>
+            {% for x in nodes %}
+                <li class="level1">
+                    <a class="link1{% if x.slug == url %} active{% endif %}" href="{{ x.get_absolute_url }}">
+                        {{ x.name|truncatechars:24 }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}

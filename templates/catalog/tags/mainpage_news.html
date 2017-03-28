@@ -1,0 +1,33 @@
+{% load thumbnail watermark %}
+
+{% if nodes %}
+             <div class="blc-conteiner mainlistgoods">
+				<div class="blc-goods">                    
+				 	<div class="allgoods" style="display: none"><a href="#">Все новинки</a></div>
+				 	<div class="header">Новинки</div>
+                    {% for x in nodes %}
+                        <div class="row">
+                            <div class="foto"><a href="{{ x.product.get_absolute_url }}">
+                                {% if x.product.get_primary_image %}
+                                    {% if x.product.get_primary_image.file.height %}
+                                        {% thumbnail x.product.get_primary_image.file "x113" as im %}
+                                            <img src="{{ im.url }}" alt="" />
+                                        {% endthumbnail %}
+                                    {% else %}
+                                        {% thumbnail x.product.get_primary_image.file "113" as im %}
+                                            <img src="{{ im.url }}" alt="" />
+                                        {% endthumbnail %}
+                                    {% endif %}
+                                {% else %}
+                                    <img src="http://placehold.it/113x113" alt="{{ item.name }}">
+                                {% endif %}
+                            </a></div>
+                            <div class="descr">
+                                <div class="name"><a href="{{ x.product.get_absolute_url }}">{{ x.product.name|truncatechars:'50' }}</a></div>
+                                <div class="price">{{ x.product.price|floatformat }} руб.</div>
+                            </div>
+                        </div>
+                    {% endfor %}
+				</div>
+			</div>
+{% endif %}

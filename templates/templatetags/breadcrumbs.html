@@ -1,0 +1,11 @@
+<div class="breadcrumbs">
+    <a href="/" title="Главная страница">Главная страница</a>
+    {% for b in breadcrumbs %}
+        <span class="slh">/</span>
+        {% if not forloop.last %}
+            <a href="{{ b.url }}" title="{{ b.title }}">{{ b.title }}</a>
+        {% else %}
+            <span class="last">{{ b.title }}</span>
+        {% endif %}
+    {% endfor %}
+</div>

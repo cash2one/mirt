@@ -1,0 +1,10 @@
+{% load pytils_numeral %}
+<div class='product-detail-marker_data tmce'>
+    <h4>{{ marker.name }}</h4>
+    <p>На данном складе находится {{ product_count|floatformat }} шт.<br>
+       {% if marker.mode %}{{ marker.mode }}<br>{% endif %}
+       {% if marker.phone %}{{ marker.phone }}<br>{% endif %}
+       {% if marker.address %}{{ marker.address }}<br>{% endif %}
+    </p>
+    {% if marker.text %}{{ marker.text|safe }}{% endif %}
+</div>

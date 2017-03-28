@@ -1,0 +1,24 @@
+-e git+https://tgrin@bitbucket.org/simple_media/django.git#egg=Django
+FeinCMS==1.7.4
+Pillow
+MySQL-python==1.2.5
+django-appconf==0.6
+-e git://github.com/jezdez/django_compressor.git@772ecd1ef2ce021d05cbc44eb8602f7d59db2c52#egg=django_compressor-dev
+south==1.0.2
+django-constance==0.6
+django-filebrowser==3.5.2
+django-mptt==0.6.0
+django-tinymce==1.5.1
+python-dateutil==2.1
+django-grappelli==2.4.10
+django-picklefield==0.3.0
+django-widget-tweaks==1.3
+pytils==0.2.3
+pytz==2013d
+six==1.4.1
+sorl-thumbnail==12.3
+lxml
+BeautifulSoup
+-e git://github.com/bashu/django-watermark@develop#egg=django-watermark
+django-registration==0.8
+

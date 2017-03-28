@@ -1,0 +1,13 @@
+<div class="catalog_filter_widget select_box {{ feature.name }}" id="{{ feature.name }}">
+    <div class="label">{{ feature.label }}</div>
+    <select multiple name="{{ feature.name }}">
+    {% for value in feature.widget.values %}
+        <option value="{{ value.value }}" {% if value.selected %}selected="" {% endif %}>{{ value.label }}</option>
+    {% endfor %}
+    </select>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#{{ feature.name }} select").select2({locale: "ru"});
+    });
+</script>

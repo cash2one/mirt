@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+    {% load flatpages_extras seo_extras services_extras catalog_extras thumbnail order_extras %}
+
+    {% block page-seo %}
+        {% load seo_extras %}
+        {% get_seo product %}
+    {% endblock %}
+
+    {% block header %}
+        {% include "templatetags/header.html" %}
+    {% endblock %}
+
+    {% block breadcrumbs %}
+        {% include "templatetags/breadcrumbs.html" %}
+    {% endblock %}
+
+    {% block main-content %}
+        <div class="main-content">
+            <div class="cb" style="height: 30px;"></div>
+            <div class="main-content-l">
+                {% catalog_filter %}
+                {% catalog_side_menu directory.slug %}
+            </div>
+            <div class="main-content-r tmce">
+                <h1>Товары, близкие по цене к <a href="{{ product.get_absolute_url }}">{{ product }}</a>:</h1>
+
+                <div class="cb"></div>
+                {% if items %}
+                    {% include "catalog/tags/list_controls.html" %}
+                    {% include "catalog/tags/items_list.html" %}
+                    {% include "catalog/tags/list_controls.html" %}
+                {% else %}
+                    <h2>Товаров не найдено</h2>
+                {% endif %}
+                <div class="cb-40"></div>
+
+                <div class="cb"></div>
+            </div>
+            <div class="cb"></div>
+        </div>
+    {% endblock %}

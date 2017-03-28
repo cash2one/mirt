@@ -1,0 +1,169 @@
+{% extends 'base_old.html' %}
+{% load compress flatpages_extras seo_extras services_extras catalog_extras thumbnail order_extras announce_extras watermark %}
+
+{% block page-seo %}
+    {% load seo_extras %}
+    {% get_seo product %}
+{% endblock %}
+
+{% block extrascripts %}
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    {% compress js %}
+        <script type="text/javascript" src="/media/js/product_detail_map.js"></script>
+        <script type="text/javascript">
+            jQuery(function($) {
+                sgallery.init();
+                simple_tabs($(".product-detail-tab-content"),$(".product-detail-tab-switch"));
+                simple_tabs($(".in-stock-tab"),$(".in-stock-switch"));
+                products_detail_map();
+            });
+        </script>
+    {% endcompress %}
+{% endblock %}
+
+{% block header %}
+    {% include "templatetags/header_old.html" %}
+{% endblock %}
+
+{% block breadcrumbs %}
+    {% include "templatetags/breadcrumbs.html" %}
+{% endblock %}
+
+{% block main-content %}
+    <div class="main-content">
+        <div class="cb" style="height: 30px;"></div>
+        <div class="main-content-l">
+            {% catalog_side_menu_old product.directory.slug %}
+            <div class="cb-40"></div>
+            {% announce_widget %}
+            <div class="cb"></div>
+        </div>
+        <div class="main-content-r tmce">
+            <div class="product-detail side-l">
+
+                <div class="product-detail-images">
+                    <div class="big">
+                        {% if product.get_primary_image %}
+                        <a rel="group" class="sgallery" href="{{ product.get_primary_image.file.url|watermark:"WM,position=br,opacity=100" }}" title="{{ product.name }}">
+                            {% thumbnail product.get_primary_image.file "315" crop="center" upscale=False quality=100 as im %}
+                                <img src="{{ im.url }}" alt="{{ product.name }}">
+                            {% endthumbnail %}
+                        </a>
+                        {% else %}
+                            <img src="http://placehold.it/315x270" alt="{{ product.name }}">
+                        {% endif %}
+                    </div>
+                    {% if images %}
+                        <div class="small">
+                            {% if use_slider %}
+                                {% include "catalog/tags/product_images_slider.html" with sets=images %}
+                            {% else %}
+                                {% for img in images %}
+                                    <a rel="group" href="{{ img.file.url|watermark:"WM,position=br,opacity=100" }}" class="sgallery {% cycle "first" "" "last" %}" title="{{ product.name }}">
+                                        {% thumbnail img.file "100x90" crop="center" upscale=False quality=100 as im %}
+                                            <img src="{{ im.url }}" alt="{{ product.name }}">
+                                        {% endthumbnail %}
+                                    </a>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="cb" style="height: 32px;"></div>
+            </div>
+            <div class="product-detail side-r">
+                <h1>{{ product.name }} {% if product.brand %}{{ product.brand }}{% endif %}</h1>
+                {% autoescape off %}{{ product.description }}{% endautoescape %}
+                <div class="cb" style="height: 14px;"></div>
+
+                {% if product.get_price %}
+                    <div class="product-price">
+                        {{ product.get_price }} руб.
+                    </div>
+                {% endif %}
+                <form class="buy-product" action="{% url "order:add_to_cart" product.id %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="quantity" value="1">
+                    <button class="small-butt buy-product" type="submit">Купить</button>
+                </form>
+                <div class="cb"></div>
+
+            </div>
+
+            <div class="cb"></div>
+
+            <div class="product-detail-tab-switches">
+                {% if product.get_features %}
+                    <button class="product-detail-tab-switch active">Характеристики</button>
+                    {% if stocks %}
+                        <button class="product-detail-tab-switch">Наличие в магазинах</button>
+                    {% endif %}
+                {% else %}
+                    {% if stocks %}
+                        <button class="product-detail-tab-switch active">Наличие в магазинах</button>
+                    {% endif %}
+                {% endif %}
+
+            </div>
+
+            <div class="product-detail-tab-contents">
+                {% if product.get_features %}
+                    <div class="product-detail-tab-content active">
+                        <table class="product-detail-features">
+                        <tbody>
+                            {% for feature in product.get_features %}
+
+                                <tr>
+                                    <td>{{ feature.feature.name }}</td>
+                                    <td>{{ feature.value }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                        </table>
+                    </div>
+                {% endif %}
+
+                {% if stocks %}
+                    <div class="product-detail-tab-content {% if not product.get_features %}active{% endif %} product-detail-in-stock">
+                        <a class="in-stock-switch active">Показать списком</a>
+                        {% if map_data %}
+                            <a class="in-stock-switch in-stock-switch-map">Показать на карте</a>
+                        {% endif %}
+                        <table class="in-stock-tab active">
+                        <tbody>
+                            <tr>
+                                <th>Адрес</th>
+                                <th>Наличие</th>
+                                <th>Режим работы</th>
+                                <th>Телефон</th>
+                            </tr>
+                            {% for stock in stocks %}
+                                <tr>
+                                    <td>{{ stock.address|safe }}</td>
+                                    <td class="in-stock-count">{{ stock.count|floatformat }}</td>
+                                    <td>{% if stock.mode %}{{ stock.mode }}{% endif %}</td>
+                                    <td>{% if stock.phone %}{{ stock.phone|safe }}{% endif %}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                        </table>
+                        {% if map_data %}
+                            <div class="in-stock-tab">
+                                <div id="product_detail_map" class="product_detail_map" data-markers="{{ map_data }}" data-product-id="{{ product.id }}" data-url="/render_marker_data/"></div>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="cb" style="height: 35px"></div>
+
+            {% products_similar_and_accessories_slider_old product %}
+
+            {# {% accessories_and_similar_products product.id %}#}
+        </div>
+
+        <div class="cb"></div>
+    </div>
+{% endblock %}

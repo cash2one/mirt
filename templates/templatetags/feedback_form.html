@@ -1,0 +1,32 @@
+<a style="display: {% if show_form %}block{% else %}none{% endif %}" href="{{ request.META.PATH_INFO }}" class="modal-backdrop" id="feedback-backdrop"></a>
+<div class="modal-window" id="feedback-popup" style="display: {% if show_form %}block{% else %}none{% endif %}">
+    <div class="inner">
+    <a href="{{ request.META.PATH_INFO }}" class="close-it">&#215;</a>
+    <div class="tmce"></div>
+    <div class="form">
+        <div class="form-title">Написать нам</div>
+        <form remote="true" enctype="multipart/form-data" action='{% url "contacts" %}' method="post">
+            {% csrf_token %}
+            <input type="hidden" name="show_form" value="True" required>
+            <input type="hidden" id="check" name="name" value="imbot" required>
+
+            <div class="row">
+                <input value="{{ context.name }}" placeholder="Имя" {% if context.form.errors.eman %}class="error"{% endif %} name="eman" />
+            </div>
+
+            <div class="row right">
+                <input value="{{ context.email }}" placeholder="E-mail" {% if context.form.errors.email %}class="error"{% endif %} name="email" />
+            </div>
+
+            <div class="row full">
+                <textarea name="message" {% if context.form.errors.message %}class="error"{% endif %} placeholder="Сообщение" >{{ context.message }}</textarea>
+            </div>
+            <div class="cb"></div>
+            <button class="butt">Отправить</button>
+            <div class="required">Все поля являются обязательными</div>
+            <div class="cb"></div>
+        </form>
+    </div>
+    </div>
+</div>
+

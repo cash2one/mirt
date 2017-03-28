@@ -1,0 +1,64 @@
+{% load order_extras %}
+<form class="form order-form self_delivery active" method="post" action="/order/">
+    {% csrf_token %}
+    <input name="delivery_type" type="hidden" value="self_delivery">
+    <table>
+        <tbody>
+
+
+
+        <tr>
+            <td class="left">Ф.И.О.</td>
+            <td class="row">
+                <input id="id_full_name" maxlength="255" name="full_name" placeholder="Ф.И.О." type="text">
+            </td>
+        </tr>
+
+        <tr>
+            <td class="left">Телефон<span class="required">*</span></td>
+            <td class="row">
+                <input id="id_phone" maxlength="255" name="phone" placeholder="Телефон" type="text">
+            </td>
+        </tr>
+
+        <tr>
+            <td class="left">E-mail<span class="required">*</span></td>
+            <td class="row">
+                <input id="id_email" maxlength="75" name="email" placeholder="E-mail" type="text">
+            </td>
+        </tr>
+
+        <tr>
+            <td class="left">Метод оплаты</td>
+            <td class="row">
+                <select name="payment_type">
+                    <option selected="selected" value="cash_payment">Наличными, оплата картой в магазине.</option>
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="left">Магазины</td>
+            <td class="row">
+                <select name="webstock">
+                {% stocks_tag %}
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="left">Комментарий к заказу</td>
+            <td class="row ">
+                <textarea cols="40" id="id_comment" name="comment" placeholder="Комментарий к заказу" rows="10"></textarea>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="left"></td>
+            <td><button class="cart-button" type="submit">Оформить</button></td>
+        </tr>
+        </tbody>
+    </table>
+
+</form>
+

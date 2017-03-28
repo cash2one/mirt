@@ -1,0 +1,28 @@
+{% load compress flatpages_extras %}
+        <link href="http://cdn.simplemedia.ru/jquery-simple-image-gallery/simple_gallery.min.css" rel="stylesheet">
+        <link href='http://fonts.googleapis.com/css?family=Roboto:400,300italic,300,100italic,100,400italic,500,500italic,700,700italic,900,900italic&subset=latin,cyrillic-ext' rel='stylesheet' type='text/css'>
+    {% compress css %}
+        <link rel="stylesheet" media="screen" href="/media/css/style.css" charset="utf-8">
+    {% endcompress %}
+{#    {% is_mobile request %}#}
+
+    {% compress js %}
+        <script type="text/javascript" src="/media/js/vendor/jquery-1.7.2.js"></script>
+        <script type="text/javascript" src="/media/js/vendor/jquery.touchslider.js"></script>
+        <script type="text/javascript" src="/media/js/vendor/masked_input.js"></script>
+        <script type="text/javascript" src="/media/js/vendor/jquery-ui-1.8.23.custom.min.js" ></script>
+        <script type="text/javascript" src="/media/js/vendor/jquery.ui.touch.js" ></script>
+        <script type="text/javascript" src="/media/js/sticky_top_menu.js" ></script>
+        <script type="text/javascript" src="/media/js/vendor/select2/select2.js" ></script>
+        <script type="text/javascript" src="/media/js/vendor/select2/select_2_locale.ru.js" ></script>
+        <script type="text/javascript" src="/media/js/input_delay.js"></script>
+        <script type="text/javascript" src="/media/js/simpletabs.js"></script>
+        <script type="text/javascript" src="/media/js/modals.js"></script>
+        <script type="text/javascript" src="/media/js/forms.js"></script>
+        <script type="text/javascript" src="/media/js/filter_widget.js"></script>
+        <script type="text/javascript" src="/media/js/catalog_list_fix.js"></script>
+        <script type="text/javascript" src="/media/js/vendor/jquery.validate.js"></script>
+        <script type="text/javascript" src="/media/js/vendor/additional-methods.js"></script>
+        <script type="text/javascript" src="/media/js/cart.js"></script>
+    {% endcompress %}
+        <script src="http://cdn.simplemedia.ru/jquery-simple-image-gallery/simple_gallery.min.js" type="text/javascript"></script>

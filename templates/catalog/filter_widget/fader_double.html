@@ -1,0 +1,15 @@
+<div class="catalog_filter_widget fader_double {{ feature.name }}" id="{{ feature.name }}">
+    <div class="label">{{ feature.label }}</div>
+    <div class="trackbar" data-min="{{ feature.widget.min }}" data-max="{{ feature.widget.max }}">
+    </div>
+    <input name="{{ feature.name }} min" fader_double_min="true" value="{{ feature.widget.current_min }}">
+    <div class="sep"></div>
+    <input class="max" name="{{ feature.name }} max" fader_double_max="true" value="{{ feature.widget.current_max }}">
+</div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    var fd = $("#{{ feature.name }}");
+    fader_double(fd.find(".trackbar"), fd.find("input[fader_double_min]"),fd.find("input[fader_double_max]"));
+});
+</script>

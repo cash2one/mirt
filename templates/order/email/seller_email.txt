@@ -1,0 +1,19 @@
+{% load humanize %}
+Список покупок
+{% for order_item in order.orderitem_set.all %}{{ order_item.product.name }}{% endfor %}
+
+Покупатель
+    Имя: {{ order.first_name }} {{ order.last_name }}
+    Телефон: {{ order.phone }}
+    Доп. телефон: {{ order.addition_phone }}
+    E-mail: {{ order.email }}
+
+{% if order.delivery_type %}Способ доставки: {{ order.get_delivery_type_display }}{% endif %}
+
+{% if order.delivery_type == 'delivery' %}Адрес доставки: {% if order.region %}{{ order.region }}{% endif %}{% if order.city %}, {{ order.city }}{% endif %}{% if order.street %}, ул. {% endif %}{{ order.street }}{% if order.house %}, д. {{ order.house }}{% endif %}{% if order.building %}, к. {{ order.building }}{% endif %}{% if order.apartment %}, кв. {{ order.apartment }}{% endif %}{% endif %}
+
+{% load humanize %}Сумма покупки: {{ order.total_cost|floatformat|intcomma }} Р.
+
+{% if order.payment_type %}Способ доставки: {{ order.get_payment_type_display }}{% endif %}
+
+{% if order.comment %}Комментарий: {{ order.comment }}{% endif %}

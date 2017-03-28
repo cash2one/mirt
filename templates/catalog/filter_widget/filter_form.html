@@ -1,0 +1,25 @@
+{% if filter_widget %}
+    {% load pytils_numeral %}
+    <div class="cb" style="height: 30px;"></div>
+    <div class="catalog_filter">
+        <div class="taitle">Фильтр</div>
+        <form action="{{ filter_widget.url }}">
+        {% for feature in filter_widget.get_features %}
+            {% if feature.widget.type == "fader_double" %}
+                {% include "catalog/filter_widget/fader_double.html" with feature=feature %}
+            {% endif %}
+            {% if feature.widget.type == "select_box" %}
+                {% include "catalog/filter_widget/select_box.html" with feature=feature %}
+            {% endif %}
+            {% if feature.widget.type == "checkbox" %}
+                {% include "catalog/filter_widget/checkbox.html" with feature=feature %}
+            {% endif %}
+        {% endfor %}
+        {% if filter_found and filter_qs %}
+            <div class="filter-found">{{ filter_found|choose_plural:"Найден, Найдено, Найдено" }} {{ filter_found }} {{ filter_found|choose_plural:"товар, товара, товаров" }}</div>
+        {% endif %}
+        <button type="submit">Подобрать</button>
+        <a href="{{ filter_widget.url }}" class="reset-form"><span>Сбросить</span></a>
+        </form>
+    </div>
+{% endif %}

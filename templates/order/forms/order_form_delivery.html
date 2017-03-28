@@ -1,0 +1,96 @@
+<form class="form order-form delivery" method="post" action="/order/">
+    {% csrf_token %}
+    <input name="delivery_type" type="hidden" value="delivery">
+    <table>
+        <tbody>
+
+            <tr>
+                <td class="left">Ф.И.О.<span class="required">*</span></td>
+                <td class="row">
+                    <input id="id_full_name" maxlength="255" name="full_name" placeholder="Ф.И.О." type="text">
+                </td>
+            </tr>
+            <tr>
+                <td class="left">Телефон<span class="required">*</span></td>
+                <td class="row">
+                    <input id="id_phone" maxlength="255" name="phone" placeholder="Телефон" type="text">
+                </td>
+            </tr>
+
+            <tr>
+                <td class="left">E-mail<span class="required">*</span></td>
+                <td class="row">
+                    <input id="id_email" maxlength="75" name="email" placeholder="E-mail" type="text">
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="left">Индекс</td>
+                <td class="row">
+                    <input id="id_postal_code" maxlength="255" name="postal_code" placeholder="Индекс" type="text">
+                </td>
+            </tr>
+            <tr>
+                <td class="left">Город</td>
+                <td class="row">
+                    <input id="id_city" maxlength="255" name="city" placeholder="Город" type="text">
+                </td>
+            </tr>
+            <tr>
+                <td class="left">Улица</td>
+                <td class="row ">
+                    <input id="id_street" maxlength="255" name="street" placeholder="Улица" type="text">
+                </td>
+            </tr>
+
+            <tr>
+                <td class="left">Дом</td>
+                <td class="row ">
+                    <input id="id_house" maxlength="255" name="house" placeholder="Дом" type="text">
+                </td>
+            </tr>
+
+            <tr>
+                <td class="left">Квартира</td>
+                <td class="row">
+                    <input id="id_apartment" maxlength="255" name="apartment" placeholder="Квартира" type="text">
+                </td>
+            </tr>
+
+
+
+{#            <tr>#}
+{#                <td class="left">Адрес<span class="required">*</span></td>#}
+{#                <td class="row">#}
+{#                    <input id="id_address" maxlength="500" name="address" placeholder="Адрес" type="text">#}
+{#                </td>#}
+{#            </tr>#}
+
+
+{#            <tr>#}
+{#                <td class="left">Метод оплаты</td>#}
+{#                <td class="row">#}
+{#                    <select name="payment_type">#}
+{#                        <option selected="selected" value="0">Онлайн</option>#}
+{#                        <option value="1">Наличными</option>#}
+{#                    </select>#}
+{#                </td>#}
+{#            </tr>#}
+
+            <tr>
+                <td class="left">Комментарий к заказу</td>
+                <td class="row ">
+                    <textarea cols="40" id="id_comment" name="comment" placeholder="Комментарий к заказу" rows="10"></textarea>
+                </td>
+            </tr>
+
+
+
+            <tr>
+                <td class="left"></td>
+                <td><button class="cart-button" type="submit">Оформить</button></td>
+            </tr>
+        </tbody>
+    </table>
+</form>

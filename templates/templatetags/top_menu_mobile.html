@@ -1,0 +1,13 @@
+<div class="win topmenu">
+	<div class="in">
+		<div class="close"><a href="javascript:void(0);">Закрыть</a></div>
+		<div class="hf">Меню</div>
+		<div class="wintopmenu">
+				<ul>
+                    {% for node in nodes %}
+                        <li><a href="{{ node.url }}" class="top-menu-item{% if node.url == url %} active{% endif %}">{{ node.get_menu_title }}<span></span></a></li>
+                    {% endfor %}
+				</ul>
+		</div>
+	</div>
+</div>

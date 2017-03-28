@@ -1,0 +1,9 @@
+{% if nodes %}
+    <div class="catalog-popular">
+        <div class="taitle">Популярные категории</div>
+        {% for node in nodes %}
+            <a href="{{ node.get_absolute_url }}" class="bottom-menu-item{% if node.slug == url %} active{% endif %}">{{ node.get_menu_title }}</a>
+        {% endfor %}
+        <div class="cb"></div>
+    </div>
+{% endif %}

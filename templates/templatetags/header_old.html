@@ -1,0 +1,46 @@
+{% load flatpages_extras placeholder feedback_extras order_extras personal_tags %}
+
+<div class="header">
+    <div id="sticky_menu" class="header-wrapper">
+        <div class="wrap">
+        <div class="header-extra_phone">
+            <span>Звонок бесплатный</span>
+            <a href="#">8 (800) 775-17-18</a>
+        </div>
+        {% get_top_menu_old url %}
+        {% cart_tag_old %}
+        {% auth_form_old request %}
+{#        <a id="show_form-header" class="header-feedback-button" href="{% url "contacts" %}?show_form=true">Обратная связь</a>#}
+        </div>
+    </div>
+    <div id="sticky_detect"></div>
+</div>
+
+<div class="header-contacts">
+    <a href="/" class="hc-company-logo">
+        <img src="/media/img/company_logo.png">
+    </a>
+    <div class="hc-inner">
+        <table>
+            <tbody>
+                <tr>
+                    <td class="hc-phone-l">
+                        <div class="hc-ico phone"></div>
+                    </td>
+                    <td class="hc-phone-r tmce">
+                        <a href="tel:{% placeholder 'phone' %}">{% placeholder 'phone' %}</a>
+                    </td>
+                    <td class="tmce">
+                        <span style="color: #bcbdbd; font-size: 11px;">
+                        Консультируем и принимаем заказы<br>
+                        каждый день с 9:00 до 20:00 (MSK)<br>
+                        Звонок бесплатный
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="cb"></div>
+    </div>
+    <div class="cb"></div>
+</div>

@@ -1,0 +1,15 @@
+{% load mptt_tags catalog_extras %}
+{% if nodes %}
+    <div class="submenu">
+        <ul>
+            {% for x in nodes %}
+                <li class="level2{% catalog_sub2colmenulili x.id %}">
+                    <a{% catalog_sub2colmenuclass x.id %} href="{{ x.get_absolute_url }}">
+                        {{ x.name|truncatechars:24 }}
+                    </a>
+                    {% catalog_sub2colmenu x.id %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}

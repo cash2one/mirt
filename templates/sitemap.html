@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>{{ host }}</loc>
+        <lastmod>{% now "Y-m-d" %}</lastmod>
+        <priority>0.9</priority>
+    </url>
+    {% for item in ql %}
+        <url>
+            <loc>{{ host }}{{ item.get_absolute_url }}</loc>
+            <lastmod>{% now "Y-m-d" %}</lastmod>
+            <changefreq>daily</changefreq>
+            <priority>0.8</priority>
+        </url>
+    {% endfor %}
+
+    {% for item in products %}
+        <url>
+            <loc>{{ host }}{{ item.get_absolute_url }}</loc>
+            <lastmod>{% now "Y-m-d" %}</lastmod>
+            <changefreq>daily</changefreq>
+            <priority>0.8</priority>
+        </url>
+    {% endfor %}
+
+    {% for item in directory %}
+        <url>
+            <loc>{{ host }}{{ item.get_absolute_url }}</loc>
+            <lastmod>{% now "Y-m-d" %}</lastmod>
+            <changefreq>daily</changefreq>
+            <priority>0.8</priority>
+        </url>
+    {% endfor %}
+
+    {% for item in news %}
+        <url>
+            <loc>{{ host }}{{ item.get_absolute_url }}</loc>
+            <lastmod>{% now "Y-m-d" %}</lastmod>
+            <changefreq>daily</changefreq>
+            <priority>0.8</priority>
+        </url>
+    {% endfor %}
+
+
+    {% for item in flatpages %}
+        <url>
+            <loc>{{ host }}{{ item.get_absolute_url }}</loc>
+            <lastmod>{% now "Y-m-d" %}</lastmod>
+            <changefreq>daily</changefreq>
+            <priority>0.8</priority>
+        </url>
+    {% endfor %}
+
+</urlset>

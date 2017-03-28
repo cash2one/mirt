@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% load flatpages_extras seo_extras services_extras order_extras catalog_extras %}
+{% load thumbnail catalog_filters %}
+    {% block page-seo %}
+        {% load seo_extras %}
+        {% get_seo item %}
+    {% endblock %}
+
+    {% block header %}
+        {% include "templatetags/header.html" with url="/profile/" %}
+    {% endblock %}
+
+    {% block breadcrumbs %}
+        {% include "templatetags/breadcrumbs.html" %}
+    {% endblock %}
+
+    {% block main-content %}
+        <div class="main-content">
+            <div class="cb" style="height: 10px;"></div>
+            <div class="main-content-l lk">
+                <div class="tree-menu side-menu">
+                         <a class="menu-item lvl0" href="{% url 'personal:edit_user_profile' %}">
+                            Личные данные
+                        </a>
+                        <a class="menu-item lvl0 select" href="{% url 'personal:list_orders' %}">
+                            История покупок
+                        </a>
+                </div>
+            </div>
+            <div class="main-content-r tmce lk lk-top" style="border-radius:5px;">
+                <h1>История покупок</h1>
+                {% for item in orders %}
+                    <table class="cart-items history-items">
+                    <tbody>
+                        <tr>
+                            <th colspan="4">Заказ № {{ item.id }} от {{ item.created_at }}</th>
+                        </tr>
+                        {% for p in item.get_items %}
+                        <tr class="cart-product{% if forloop.first %} first{% else %}{% if forloop.last %} last{% endif %}{% endif %}">
+                            <td class="cart-product-image">
+                                <a href="#" title="">
+                                    <div class="product-image-wrapper">
+                                     {% if p.product.get_primary_image %}
+                                        {% with p.product.get_primary_image.file as image %}
+                                        {% if image|is_portrait %}
+                                            {% thumbnail image "x122" crop="center" upscale=False quality=100 as im %}
+                                                <img src="{{ im.url }}" alt="{{ p.product_name }}">
+                                            {% endthumbnail %}
+                                        {% else %}
+                                            {% thumbnail image "161" crop="center" upscale=False quality=100 as im %}
+                                                <img src="{{ im.url }}" alt="{{ p.product_name }}">
+                                            {% endthumbnail %}
+                                        {% endif %}
+                                        {% endwith %}
+                                    {% else %}
+                                        <img src="http://placehold.it/161x122" alt="{{ item.name }}">
+                                    {% endif %}
+                                    </div>
+                                </a>
+                            </td>
+                            <td class="cart-product-details">
+                                <a href="{{ p.product.get_absolute_url }}" title="{{ p.product_name }}">
+                                    <div style="word-break: break-all;" class="product-title">{{ p.product_name }}</div>
+                                </a>
+                            </td>
+                            <td class="history-product-details">
+                                <div class="product-title">Количество: {{ p.p_quantity }}</div>
+                            </td>
+                            <td class="cart-product-total-price">
+                                <div class="num">{{ p.p_sum }} руб.</div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% endfor %}
+
+            </div>
+
+            <div class="cb"></div>
+        <div class="list-controls history">
+            {% include "templatetags/pagination.html" with items=orders %}
+
+{#                <div class="pagination">#}
+{#                    <div class="pagination-controls">#}
+{#                        <a class="nav-item first num active" href="#">1</a>#}
+{#                        <a class="nav-item num" href="#">2</a>#}
+{#                        <a class="nav-item to-end" href="#">в конец</a>#}
+{#                    </div>#}
+{#                </div>#}
+            <div class="cb"></div>
+        </div>
+
+        </div>
+
+        <div class="cb"></div>
+
+
+    {% endblock %}
+

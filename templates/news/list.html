@@ -1,0 +1,53 @@
+{% extends 'base_inner.html' %}
+    {% load flatpages_extras seo_extras thumbnail services_extras order_extras catalog_extras %}
+
+    {% block page-seo %}
+        {% load seo_extras %}
+        {% get_seo flatpage %}
+    {% endblock %}
+
+    {% block header %}
+        {% include "templatetags/header.html" with url=flatpage.url %}
+    {% endblock %}
+
+    {% block breadcrumbs %}
+        {% include "templatetags/breadcrumbs.html" %}
+    {% endblock %}
+
+    {% block content %}
+        <div class="main-content">
+            <div class="cb" style="height: 30px;"></div>
+            <div class="main-content-l">
+                {% flatpages_side_menu flatpage.url %}
+            </div>
+            <div class="main-content-r">
+                <div class="tmce">
+                    {{ flatpage.content|safe }}
+                    <div class="cb"></div>
+                </div>
+
+                <div class="blog-list">
+                    {% for item in context.list %}
+                        <a class="blog-link" href="{{ item.get_absolute_url }}">
+                            <div class="blog-item">
+                                <div class="blog-name">{{ item.title }}</div>
+                                {% if item.got_image %}
+                                    <div class="blog-image">
+                                        {% thumbnail item.image "750" upscale=False quality=100 as im %}
+                                            <img src="{{ im.url }}" alt="{{ item.title }}">
+                                        {% endthumbnail %}
+                                    </div>
+                                {% endif %}
+                                <div class="blog-short-desc"><p>{{ item.short_description }}</p></div>
+                                <div class="blog-date">{{ item.created_at }}</div>
+                                <div class="cb"></div>
+                            </div>
+                        </a>
+                    {% endfor %}
+                    {% include "templatetags/pagination.html" with items=context.items %}
+                </div>
+
+            </div>
+            <div class="cb"></div>
+        </div>
+    {% endblock %}

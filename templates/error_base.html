@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+{% load  flatpages_extras placeholder %}
+<!--[if lt IE 7]> <html class="lt-ie9 lt-ie8 lt-ie7" lang="ru"> <![endif]-->
+<!--[if IE 7]> <html class="lt-ie9 lt-ie8 ie7" lang="ru"> <![endif]-->
+<!--[if IE 8]> <html class="lt-ie9" lang="ru"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="ru"> <!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/media/img/favicon.ico" />
+
+    {% include "templatetags/jscss.html" %}
+
+    {% block page-seo %}
+        <title>{{ error_type }}</title>
+    {% endblock %}
+
+
+</head>
+<body>
+    {% block modals %}{% endblock %}
+    <div id="main-content-wrapper">
+        <div class="header-contacts">
+            <a href="/" class="hc-company-logo">
+                <img src="/media/img/company_logo.png">
+            </a>
+            <div class="hc-inner">
+                <div class="cb"></div>
+            </div>
+            <div class="cb"></div>
+        </div>
+
+        <div class="wrap">
+            <div class="main-content tmce">
+                {{ error_text|safe }}
+            </div>
+            <div class="cb"></div>
+        </div>
+        <div class="cb"></div>
+
+    <div class="pax"></div>
+    </div>
+
+    <footer>
+        <div class="footer-wrap">
+            <div class="cb-40"></div>
+{#            <div class="footer-text tmce">#}
+{#                <h5>Информация о ценах и наличии товара обновлена 2015-12-23 12:19:13</h5>#}
+{#                <p>#}
+{#                    Информация, указанная на сайте, не является публичной офертой. Информация о товарах, их технических свойствах и характеристиках, ценах является предложением “Мир Тюнинга” делать оферты. Акцептом “Мир Тюнинга” полученной оферты является подтверждение заказа с указанием товара и его цены. Сообщение “Мир Тюнинга” о цене заказанного товара, отличающейся от указанной в оферте, является отказом “Мир Тюнинга” от акцепта и одновременно офертой со стороны “Мир Тюнинга”. Информация о технических характеристиках товаров, указанная на сайте, может быть изменена производителем в одностороннем порядке. Изображения товаров на фотографиях, представленных в каталоге на сайте, могут отличаться от оригиналов. Информация о цене товара, указанная в каталоге на сайте, может отличаться от фактической к моменту оформления заказа на соответствующий товар. Подтверждением цены заказанного товара является сообщение “Мир Тюнинга” о цене такого товара.#}
+{#                </p>#}
+{#            </div>#}
+            <div class="footer-developers">
+                <div class="copy">
+                    © {% now "Y" %} «МИР ТЮНИНГА»<br>
+                    сеть магазинов автотоваров
+                </div>
+                <div class="footer-social">
+
+                </div>
+                <a class="footer-dev-logo" href="http://www.simplemedia.ru">
+                    <img src="/media/img/dev-logo.png">
+                </a>
+                <a href="http://www.simplemedia.ru/sozdanie-internet-magazina/">
+                    Создание интернет-магазина
+                </a>
+            </div>
+            <div class="cb"></div>
+        </div>
+    </footer>
+</body>
+</html>
+
+

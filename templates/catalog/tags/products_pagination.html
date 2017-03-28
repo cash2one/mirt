@@ -1,0 +1,36 @@
+{% if items.paginator.page_range|length > 1 %}
+<div class="list-controls">
+    <div class="pagination">
+        <div class="pagination-controls">
+            {% if items.has_previous %}
+                <a class="nav-item to-start" href="{{ page_url }}?{{ qs }}{{ filter_qs }}&page={{ items.previous_page_number }}">в начало</a>
+            {% endif %}
+
+            {% if items.range_page|first > 1 %}
+                <a class="nav-item num first{% if items.number == 1 %} active{% endif %}" href ="{{ page_url }}?{{ qs }}{{ filter_qs }}&page=1">1</a>
+            {% endif %}
+
+            {% if items.range_page|first > 2 %}
+                <span class="nav-item etc">...</span>
+            {% endif %}
+
+            {% for page_num in items.range_page %}
+                <a class="nav-item{% if forloop.first%} first{% endif %} num{% if page_num == items.number %} active{% endif %}" href ="{{ page_url }}?{{ qs }}{{ filter_qs }}&page={{ page_num }}">{{ page_num }}</a>
+            {% endfor %}
+
+            {% if items.range_page|last < items.paginator.num_pages|add:"-1"  %}
+                <span class="nav-item etc">...</span>
+            {% endif %}
+
+            {% if items.range_page|last < items.paginator.num_pages  %}
+                <a class="nav-item num last{% if items.number == items.paginator.num_pages %} active{% endif %}" href ="{{ page_url }}?{{ qs }}{{ filter_qs }}&page={{ items.paginator.num_pages  }}" >{{ items.paginator.num_pages  }}</a>
+            {% endif %}
+
+            {% if items.has_next %}
+                <a class="nav-item to-end" href ="{{ page_url }}?{{ qs }}{{ filter_qs }}&page={{ items.next_page_number }}">в конец</a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="cb"></div>
+</div>
+{% endif %}

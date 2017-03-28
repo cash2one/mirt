@@ -1,0 +1,84 @@
+{% extends 'base_old.html' %}
+    {% load flatpages_extras seo_extras services_extras catalog_extras catalog_filters announce_extras %}
+
+{#    {% block page-seo %}#}
+{#        {% load seo_extras %}#}
+{#        {% get_seo flatpage %}#}
+{#    {% endblock %}#}
+
+    {% block header %}
+        {% include "templatetags/header_old.html" %}
+    {% endblock %}
+
+    {% block breadcrumbs %}
+        {% include "templatetags/breadcrumbs.html" %}
+    {% endblock %}
+
+    {% block main-content %}
+        <div class="main-content">
+            <div class="cb" style="height: 30px;"></div>
+            <div class="main-content-l">
+                {% catalog_side_menu_old %}
+                <div class="cb-40"></div>
+                {% announce_widget %}
+                <div class="cb"></div>
+            </div>
+
+            <div class="main-content-r tmce cart-container">
+                <h1>Корзина</h1>
+
+                {% if cart.quantity %}
+                <table class="cart-items">
+                    <tbody>
+                        <tr>
+                            <th>Товар</th><th>Наименование</th><th>Цена</th><th>Количество</th><th>Стоимость</th>
+                        </tr>
+                        {% for item in cart %}
+                            {% include "order/tags/cart_item.html" with item=item %}
+                        {% endfor %}
+                        <tr class="cart-summary">
+                            <td></td>
+                            <td>
+                                <div class="cart-summary-title">Итого:</div>
+                                <div class="cart-summary-num"><span>{{ cart.summary|format_price }}</span> руб.</div>
+                            </td>
+                            <td colspan="2"></td>
+                            <td style="vertical-align: middle">
+                                {% if not form %}
+                                <a href="{% url "order:checkout" %}?continue" class="cart-button">Оформить</a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="cb-40"></div>
+
+
+                <div class="cart-order">
+
+                    {% if form %}
+                        <h2 style="font-size: 28px">Оформление заказа</h2>
+                        <div class="order-form-tabs">
+{#                            <div class="order-form-switch active">Самовывоз</div>#}
+{#                          <div class="order-form-switch">Доставка</div>#}
+                        </div>
+{#                        {% include "order/tags/order_form.html" %}#}
+
+                        {% include "order/forms/order_form_self_delivery.html" %}
+{#                      {% include "order/forms/order_form_delivery.html" %}#}
+
+                    {% endif %}
+                </div>
+                {% else %}
+                    <p>Корзина пуста</p>
+                {% endif %}
+                <div class="cb"></div>
+            </div>
+            <div class="cb"></div>
+        </div>
+
+    <script type="text/javascript">
+        window.onload = function () { sgallery.init(); };
+    </script>
+    {% endblock %}

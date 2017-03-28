@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+    {% load flatpages_extras seo_extras services_extras order_extras catalog_extras %}
+
+    {% block page-seo %}
+        {% load seo_extras %}
+        {% get_seo item %}
+    {% endblock %}
+
+    {% block header %}
+        {% include "templatetags/header.html" with url="/anonsy/" %}
+    {% endblock %}
+
+    {% block breadcrumbs %}
+        {% include "templatetags/breadcrumbs.html" %}
+    {% endblock %}
+
+    {% block main-content %}
+        <div class="main-content">
+            <div class="cb" style="height: 30px;"></div>
+            <div class="main-content-l">
+                {% flatpages_side_menu %}
+            </div>
+            <div class="main-content-r tmce">
+                {{ item.description|safe }}
+                <div class="cb"></div>
+                <div class="blog-detail-bottom">
+                    <div class="blog-date">{{ item.created_at }}</div>
+                    <a class="baklink" href="{% url "announce:announce-list" %}">← к списку анонсов</a>
+                </div>
+            </div>
+        </div>
+    {% endblock %}

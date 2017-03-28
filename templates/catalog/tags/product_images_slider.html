@@ -1,0 +1,26 @@
+{% if sets %}
+{% load thumbnail watermark %}
+<div class="product_images_slider">
+    <div class="product_images_slider-viewport">
+        <div>
+            {% for set in sets %}
+                <div class="product_images_slider-item">
+                    {% for img in set %}
+                        <a rel="group" href="{{ img.file.url|watermark:"WM,position=br,opacity=100" }}" class="sgallery {% cycle "first" "" "last" %}" title="{{ img.name }}">
+                            {% thumbnail img.file "80x60" crop="center" upscale=False quality=100 as im %}
+                                <img src="{{ im.url }}" alt="{{ img.name }}">
+                            {% endthumbnail %}
+                        </a>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <span class="product_images_slider-prev"></span>
+
+    <span class="product_images_slider-next"></span>
+
+    <script>jQuery(function($){$(".product_images_slider").touchSlider({autoplay: false, namespace: "product_images_slider"});});</script>
+</div>
+{% endif %}

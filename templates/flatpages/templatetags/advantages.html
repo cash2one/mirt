@@ -1,0 +1,26 @@
+{% load thumbnail %}
+{% if items %}
+
+<div class="blc-service-menu">
+    <div class="inner">
+        <ul>
+        {% for item in items %}
+            <li>
+                <div class="foto"><a href="{{ item.get_absolute_url }}">
+                    {% if item.image %}
+                        {% thumbnail item.image "750x303" crop="center" upscale=False quality=100 as im %}
+                            <img src="{{ im.url }}">
+                        {% endthumbnail %}
+                    {% endif %}
+                    </a></div>
+				<div class="name"><a href="{{ item.get_absolute_url }}">
+                        {{ item.short_description|linebreaksbr }}
+    {#                    Бесплатная доставка<br>#}
+    {#                    от 1 000 руб.#}
+                    </a></div>
+			</li>
+        {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endif %}

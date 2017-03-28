@@ -1,0 +1,26 @@
+<div class="list-controls">
+    <div class="list-sort">
+        <div class="sort-name">
+
+            Сортировать по <span class="select-sort">
+            {% if not sort_is or sort_is == "price" %}<span>цене</span> ▲{% endif %}
+            {% if sort_is == "price_desc" %}<span>цене</span> ▼{% endif %}
+            </span>
+            <div class="sort-menu">
+                <a href="{{ directory.get_absolute_url }}?sort=price{{ filter_qs }}">по возрастанию цены</a>
+                <a href="{{ directory.get_absolute_url }}?sort=price_desc{{ filter_qs }}">по убыванию цены</a>
+            </div>
+        </div>
+    </div>
+    <div class="list-per-page">
+        <span>Показывать по  </span>
+        <a href="{{ directory.get_absolute_url }}?per_page=25{{ per_page_qs }}{{ filter_qs }}" class="num {% if per_page == "25" %}active{% endif %} first">25</a>
+        <a href="{{ directory.get_absolute_url }}?per_page=50{{ per_page_qs }}{{ filter_qs }}" class="num {% if per_page == "50" %}active{% endif %}">50</a>
+        <a href="{{ directory.get_absolute_url }}?per_page=75{{ per_page_qs }}{{ filter_qs }}" class="num {% if per_page == "75" %}active{% endif %}">75</a>
+        <a href="{{ directory.get_absolute_url }}?per_page=100{{ per_page_qs }}{{ filter_qs }}" class="num {% if per_page == "100" %}active{% endif %}">100</a>
+        {% if per_page != "show_all" %}
+            <a href="{{ directory.get_absolute_url }}?per_page=show_all{{ per_page_qs }}{{ filter_qs }}" class="show-all">показать всё</a>
+        {% endif %}
+    </div>
+    <div class="cb"></div>
+</div>

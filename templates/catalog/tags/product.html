@@ -1,0 +1,43 @@
+{% load thumbnail watermark %}
+
+<div class="row">
+    <div class="foto">
+        <a class="product-link" href="{{ item.get_absolute_url }}" title="{{ item.name }}">
+                {% if item.get_primary_image %}
+                    {% if item.get_primary_image.file|is_portrait %}
+                        {% thumbnail item.get_primary_image.file "x113" crop="center" upscale=False quality=100 as im %}
+                            <img src="{{ im.url }}" alt="{{ item.name }}">
+                        {% endthumbnail %}
+                    {% else %}
+                        {% thumbnail item.get_primary_image.file "113" crop="center" upscale=False quality=100 as im %}
+                            <img src="{{ im.url }}" alt="{{ item.name }}">
+                        {% endthumbnail %}
+                    {% endif %}
+                {% else %}
+                    <img src="http://placehold.it/113x113" alt="{{ item.name }}">
+                {% endif %}
+        </a>
+    </div>
+    <div class="descr">
+		<div class="name">
+            <a class="product-link" href="{{ item.get_absolute_url }}" title="{{ item.name }}">{{ item.name|truncatechars:'50' }} {% if item.brand %}{{ item.brand }}{% endif %}</a>
+		</div>
+		<div class="price">{{ item.price|floatformat }} руб.</div>
+
+        <div class="product-short-desc tmce" style="display: none">
+            {% if item.short_description %}
+                {% autoescape off %}{{ item.short_description|linebreaksbr|truncatechars:55 }}{% endautoescape %}
+            {% endif %}
+        </div>
+
+        <form style="display: none" class="catalog-product-form" action="{% url "order:add_to_cart" item.id %}" method="post">
+            <div class="product-price">
+                {% if item.get_price %}{{ item.get_price }} руб.{% endif %}
+            </div>
+
+            {% csrf_token %}
+            <input type="hidden" name="quantity" value="1">
+            <button class="small-butt buy-product" type="submit">Купить</button>
+        </form>
+	</div>
+</div>

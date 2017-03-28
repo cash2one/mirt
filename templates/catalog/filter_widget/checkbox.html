@@ -1,0 +1,5 @@
+<div class="catalog_filter_widget checkbox {{ feature.name }}">
+{#    <div class="label">{{ feature.label }}</div>#}
+    <input type="checkbox" id="{{ feature.name }}" name="{{ feature.name }}" {% if feature.widget.checked %}checked=""{% endif %}>
+    <label for="{{ feature.name }}">{{ feature.label }}</label>
+</div>

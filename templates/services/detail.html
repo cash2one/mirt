@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+    {% load flatpages_extras seo_extras services_extras order_extras catalog_extras %}
+
+    {% block page-seo %}
+        {% load seo_extras %}
+        {% get_seo item %}
+    {% endblock %}
+
+
+    {% block header %}
+        {% include "templatetags/header.html" with url="/uslugi/" %}
+    {% endblock %}
+
+    {% block breadcrumbs %}
+        {% include "templatetags/breadcrumbs.html" %}
+    {% endblock %}
+
+    {% block main-content %}
+        <div class="main-content">
+            <div class="cb" style="height: 30px;"></div>
+            <div class="main-content-l">
+                {% catalog_side_menu %}
+                <div class="cb"></div>
+                {% services_side_menu item.url %}
+                <div class="cb"></div>
+            </div>
+            <div class="main-content-r tmce">
+                {{ item.content|safe }}
+                <div class="cb"></div>
+            </div>
+            <div class="cb"></div>
+        </div>
+    {% endblock %}
+
+

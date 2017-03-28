@@ -1,0 +1,30 @@
+{% if product_sets %}
+    <div class="product-promotion-slider">
+        <br /><br />
+        <div class="tab-switches">
+            {% for set in product_sets %}
+                <div class="promo-tab {% if forloop.first %}active first{% endif %}{% if forloop.last %} last{% endif %}"><h2>{{ set.taitle }}</h2></div>
+            {% endfor %}
+        </div>
+        {% for set in product_sets %}
+            {% with tab_id=forloop.counter0 %}
+            <div class="product_slider tab_id{{ tab_id }} {% if forloop.first %}active{% endif %}">
+                <div class="product_slider-viewport tab_id{{ tab_id }}">
+                    <div class="blc-goods">
+                        {% for page in set.pages %}
+                            <div class="product_slider-item tab_id{{ tab_id }}">
+                                {% include "catalog/tags/items_list.html" with items=page %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% if set.has_pages %}
+                    <span class="product_slider-prev tab_id{{ tab_id }}"></span>
+                    <span class="product_slider-next tab_id{{ tab_id }}"></span>
+                {% endif %}
+            </div>
+            {% endwith %}
+        {% endfor %}
+    </div>
+{% endif %}
+

@@ -1,0 +1,5 @@
+<div class="top-menu">
+    {% for node in nodes %}
+        <a href="{{ node.url }}" class="top-menu-item{% if node.url == url %} active{% endif %}">{{ node.get_menu_title }}</a>
+    {% endfor %}
+</div>

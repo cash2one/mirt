@@ -1,0 +1,14 @@
+{% if list %}
+<div class="blc-crb">
+    <div class="header">Новости</div>
+    {% for item in list %}
+        <div class="row">
+            <div class="date">{{ item.created_at }}</div>
+			<div class="name"><a href="{{ item.get_absolute_url }}" class="">{{ item }}</a></div>
+		</div>
+    {% endfor %}
+    <div class="row">
+        <div class="name"><a href="{% url "news:news-list" %}">Все новости &rarr;</a></div>
+	</div>
+</div>
+{% endif %}

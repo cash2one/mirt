@@ -1,0 +1,8 @@
+<div class="blc-menu">
+    <div class="mobile_menu"><a href="javascript:void(0);">Меню</a></div>
+	<ul>
+        {% for node in nodes %}
+            <li><a href="{{ node.url }}" class="top-menu-item{% if node.url == url %} active{% endif %}">{{ node.get_menu_title }}<span></span></a></li>
+        {% endfor %}
+	</ul>
+</div>

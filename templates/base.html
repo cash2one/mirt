@@ -1,0 +1,177 @@
+<!DOCTYPE HTML>
+{% load  flatpages_extras placeholder quick_links feedback_extras order_extras personal_tags %}
+{% load announce_extras slider_extras services_extras catalog_extras news_extras %}
+
+<!--[if lt IE 7]> <html class="lt-ie9 lt-ie8 lt-ie7" lang="ru"> <![endif]-->
+<!--[if IE 7]> <html class="lt-ie9 lt-ie8 ie7" lang="ru"> <![endif]-->
+<!--[if IE 8]> <html class="lt-ie9" lang="ru"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="ru"> <!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <link rel="shortcut icon" href="/media/img/favicon.ico" />
+
+    <link href="/media/css/reset.css" rel="stylesheet">
+    <link href="/media/css/main.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/media/css/jquery.lightbox-0.5.css" media="screen" />
+
+ 	<script src="/media/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/media/js/vendor/jquery.touchslider.js"></script>
+    <script type="text/javascript" src="/media/js/vendor/masked_input.js"></script>
+    <script type="text/javascript" src="/media/js/vendor/jquery-ui-1.8.23.custom.min.js" ></script>
+    <script type="text/javascript" src="/media/js/vendor/jquery.ui.touch.js" ></script>
+    <script type="text/javascript" src="/media/js/sticky_top_menu.js" ></script>
+    <script type="text/javascript" src="/media/js/vendor/select2/select2.js" ></script>
+    <script type="text/javascript" src="/media/js/vendor/select2/select_2_locale.ru.js" ></script>
+    <script type="text/javascript" src="/media/js/input_delay.js"></script>
+    <script type="text/javascript" src="/media/js/simpletabs.js"></script>
+    <script type="text/javascript" src="/media/js/modals.js"></script>
+    <script type="text/javascript" src="/media/js/forms.js"></script>
+    <script type="text/javascript" src="/media/js/filter_widget.js"></script>
+    <script type="text/javascript" src="/media/js/catalog_list_fix.js"></script>
+    <script type="text/javascript" src="/media/js/vendor/jquery.validate.js"></script>
+    <script type="text/javascript" src="/media/js/vendor/additional-methods.js"></script>
+    <script type="text/javascript" src="/media/js/cart.js"></script>
+ 	<script type="text/javascript" src="/media/js/jquery.lightbox-0.5.min.js"></script>
+	<script src="/media/js/slides.min.jquery.js"></script>
+    <script src="/media/js/funcs.js"></script>
+	<script>
+		$(function(){
+			// Set starting slide to 1
+			var startSlide = 1;
+			// Get slide number if it exists
+			if (window.location.hash) {
+				startSlide = window.location.hash.replace('#','');
+			}
+			// Initialize Slides
+			$('#slides').slides({
+				preload: true,
+				//preloadImage: '/media/img/loading.gif',
+				generatePagination: true,
+				play: 4000,
+				pause: 2500,
+				hoverPause: true,
+				// Get the starting slide
+				start: startSlide,
+				animationComplete: function(current){
+					// Set the slide number as a hash
+					window.location.hash = '#' + current;
+				}
+			});
+		});
+	</script>
+
+    {% block extrascripts %}{% endblock %}
+    {% block page-seo %}
+        <title>{{ config.DEFAULT_TITLE }}</title>
+        <meta name="description" content="{{ config.DEFAULT_DESCR }}">
+        <meta name="keywords" content="{{ config.DEFAULT_KEYWORDS }}">
+    {% endblock %}
+
+
+</head>
+<body>
+<div class="fon"></div>
+{% get_top_menu_mobile url %}
+
+<div class="page">
+
+	<!-- верхняя часть шапки -->
+	<div class="blc-header">
+		<div class="inner">
+			<div class="logomini">
+                {%  if request.path == '/' %}
+                    <img src="/media/img/logomin.jpg" alt="" />
+                {% else %}
+                    <a href="/"><img src="/media/img/logomin.jpg" alt="" /></a>
+                {% endif %}
+			</div>
+			<div class="phone">
+				8 (800) 775-17-18
+			</div>
+
+			<div class="searh">
+				<form action="." method="get">
+					<input type="text" placeholder="Поиск среди 200 000 товаров" name="pos" />
+					<input type="image" src="/media/img/search-submit.jpg" />
+				</form>
+			</div>
+
+            {% cart_tag %}
+
+            {% get_top_menu url %}
+
+		</div>
+	</div>
+
+	<!-- шапка -->
+	<div class="blc-headerbig">
+		<div class="logo">
+            {%  if request.path == '/' %}
+                <img src="/media/img/logo.jpg" alt="" title="" />
+            {% else %}
+                <a href="/"><img src="/media/img/logo.jpg" alt="" title="" /></a>
+            {% endif %}
+        </div>
+		<div class="h_text">
+			<div class="city"><a href="javascript:void(0);">Барнаул</a></div>
+			<div class="mir"><img src="/media/img/header_text.jpg" alt="" title="" /></div>
+		</div>
+		<div class="r-text">
+			<div class="t-link">
+				<div class="wht_my_order"><a href="#">Что с моим заказом?</a></div>
+                {% auth_form request %}
+			</div>
+			<div class="phone">8 (800) 775-17-18</div>
+			<div class="cons">Консультируем и принимаем заказы<br />каждый день с 9:00 до 20:00 (NSK)<br />Звонок по России бесплатный</div>
+		</div>
+		<div class="searh">
+			<form action="." method="get">
+				<input type="text" placeholder="Поиск среди 200 000 товаров" name="pos" />
+				<input type="image" src="/media/img/search-submit.jpg" />
+			</form>
+		</div>
+		<div class="cons_mobile">Консультируем и принимаем заказы каждый день с 9:00 до 20:00 (NSK). <br />Звонок по России бесплатный.</div>
+	</div>
+
+	<!-- slider and catalog menu -->
+	<div class="blc-middel">
+		<div class="in">
+			<div class="catalogmenu">
+				<div class="ht"><a class="" data-menucatalog="0" href="javascript:void(0);">Каталог товаров</a></div>
+                {% catalog_side_colmenu %}
+			</div>
+			<div class="cont">
+                {% block slider %}{% endblock %}
+                {% get_advantages %}
+
+			</div>
+		</div>
+	</div>
+
+	<!-- -->
+	<div class="blc-mainpage-conteiner">
+		<div class="inner">
+
+            <div class="blc-cr">
+				{% news_widget %}
+				<div class="blc-crb rr">
+					{% include "templatetags/vk.html" %}
+				</div>
+			</div>
+
+            {% catalog_novinki %}
+            {% catalog_superprice %}
+            {% catalog_spest %}
+
+			<div class="clear"></div>
+		</div>
+	</div>
+
+    {% include "templatetags/footer.html" %}
+
+</div>
+</body>
+</html>

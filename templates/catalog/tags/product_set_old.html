@@ -1,0 +1,19 @@
+{% if product_set %}
+<div class="products-set">
+    <a class="catalog-subdir-link" href="{{ product_set.get_absolute_url }}" title="{{ product_set.name }}">
+        <h2>{{ taitle }}</h2>
+{#        {% if product_set.preview_products_count > 4 %}#}
+{#            <span>{{ product_set.preview_products_count }}</span>#}
+{#        {% endif %}#}
+    </a>
+    {% if product_set.preview_products_count > 4 %}
+        <a href="{{ product_set.get_absolute_url }}" class="small-gray-button show-all-products" >Все товары</a>
+    {% endif %}
+    <div class="cb-20"></div>
+        {% if product_set.top_description %}
+            {% autoescape off %}{{ product_set.top_description }}{% endautoescape %}
+        {% endif %}
+    <div class="cb"></div>
+    {% include "catalog/tags/items_list_old.html" with items=product_set.preview_products %}
+</div>
+{% endif %}

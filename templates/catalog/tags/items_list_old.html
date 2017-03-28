@@ -1,0 +1,13 @@
+{% if items %}
+    <div class="catalog-items-list">
+        {% for item in items %}
+            {% if forloop.first %}<div class="items-list-row">{% endif %}
+                {% include "catalog/tags/product_old.html" %}
+            {% if forloop.counter|divisibleby:4 %}</div>
+                {% if not forloop.last %}<div class="items-list-row">{% endif %}
+            {% endif %}
+        {% endfor %}
+        {% if not items|length|divisibleby:4 %}</div>{% endif %}
+    </div>
+    <div class="cb"></div>
+{% endif %}

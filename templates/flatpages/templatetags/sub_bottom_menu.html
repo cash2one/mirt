@@ -1,0 +1,17 @@
+{% if nodes %}
+<div class="blc-fbmenu">
+    <ul>
+        {% for node in nodes %}
+        <li class="lev1">
+            <a href="{{ node.get_absolute_url }}">{{ node.get_menu_title }}</a>
+            <ul>
+                {% for child in node.children %}
+                    <li><a href="{{ child.get_absolute_url }}" class="sub-menu-item">{{ child.get_menu_title }}</a></li>
+                {% endfor %}
+            </ul>
+        </li>
+        {% if forloop.counter|divisibleby:4 %}<div class="cb" style="display: none"></div>{% endif %}
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}

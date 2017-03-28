@@ -1,0 +1,18 @@
+{% load pytils_numeral catalog_filters %}
+
+{% if cart.quantity %}
+    <div class="cart_widget active">
+        <a href="{% url "order:checkout" %}" class="cart_widget-btn"><i></i></a>
+        <div class="cart_widget-txt">
+            <span>{{ cart.quantity }} {{ cart.quantity|choose_plural:"Товар, Товара, Товаров" }} на сумму {{ cart.summary|format_price }} руб.</span><br>
+            <a href="{% url "order:checkout" %}">Оформить заказ</a>
+        </div>
+    </div>
+{% else %}
+    <div class="cart_widget">
+        <div class="cart_widget-btn"><i></i></div>
+        <div class="cart_widget-txt empty">
+            <span>Корзина пуста</span><br>
+        </div>
+    </div>
+{% endif %}
